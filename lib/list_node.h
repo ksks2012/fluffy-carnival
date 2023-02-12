@@ -14,11 +14,14 @@ typedef struct list_node_t
 	/* data */
 	void * value;
 	struct list_node_t *next;
-	struct list_node_t *prev;
 }list_node_t;
 
+typedef struct list_t {
+	list_node_t *head;
+} list_t;
+
 extern inline list_node_t* node_new(void *);
-list_node_t* array_to_list(int *, int);
+list_t* array_to_list(int *, int);
 void print_list(const list_node_t *);
 
 void push_back(list_node_t **, void *);

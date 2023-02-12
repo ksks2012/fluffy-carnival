@@ -5,21 +5,19 @@ inline list_node_t* node_new(void* value) {
 	if(new_node == NULL)
 		return NULL;
 	new_node->next = NULL;
-	new_node->prev = NULL;
 	new_node->value = (typeof(value))value;
 	return new_node;
 }
 
-list_node_t* array_to_list(int *arr, int size) {
-
+list_t* array_to_list(int *arr, int size) {
 	if(arr == NULL || size <= 0) {
 		return NULL;
 	}
-	list_node_t *head = NULL;
+	list_t *list = (list_t *)malloc(sizeof(list_t));
 	for(int i = 0; i < size; i++) {
-		push_back(&head, &(arr[i]));
+		push_back(&(list->head), &(arr[i]));
 	}
-	return head;
+	return list;
 }
 
 void print_list(const list_node_t *head) {
@@ -42,5 +40,4 @@ void push_back(list_node_t **head, void *input) {
 		indirect = &((*indirect)->next);
 	}
 	*indirect = new_node;
-	new_node->prev = *indirect;
 }
