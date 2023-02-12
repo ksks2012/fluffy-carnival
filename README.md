@@ -14,4 +14,4 @@ run.sh
 
 |  code   | description  |
 |  ----   | ----  |
-| test_array_to_list.cpp   | turn array to list |
+| test_array_to_list.cpp   | turn array to list  |

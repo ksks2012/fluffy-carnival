@@ -31,6 +31,16 @@ void print_list(const list_node_t *head) {
 	printf("NULL\n");
 }
 
+void delete_list(list_t *list) {
+	list_node_t **head = &(list->head);
+	while (*head) {
+		list_node_t *next = (*head)->next;
+		free(*head);
+		*head = next;
+	}
+	free(list);
+}
+
 // add node to back
 void push_back(list_node_t **head, void *input) {
 	list_node_t **indirect = head;

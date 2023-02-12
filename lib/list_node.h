@@ -23,6 +23,7 @@ typedef struct list_t {
 extern inline list_node_t* node_new(void *);
 list_t* array_to_list(int *, int);
 void print_list(const list_node_t *);
+void delete_list(list_t *);
 
 void push_back(list_node_t **, void *);
 
