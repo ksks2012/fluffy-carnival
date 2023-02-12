@@ -1,0 +1,5 @@
+*.o
+*.out
+main
+*.json
+node_modules
