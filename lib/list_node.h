@@ -29,5 +29,6 @@ void push_back(list_node_t **, void *);
 void push_front(list_node_t **, void *);
 
 void insert_mid(list_node_t **, void *);
+void insert_nth_last(list_node_t **, void *, int);
 
 #endif /* __LIST_NODE_H__ */

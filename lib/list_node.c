@@ -70,3 +70,28 @@ void insert_mid(list_node_t **head, void *input) {
 	new_node->next = (*slow)->next;
 	(*slow)->next = new_node;
 }
+
+void insert_nth_last(list_node_t **head, void *input, int n) {
+	/*
+		insert the node to list in n-th position from last
+		if n > length of node then push in front
+	*/
+	list_node_t **fast_ptr = head;
+	list_node_t **slow_ptr = head;
+	list_node_t *new_node = node_new(input);
+
+	for(int i = 0; i < n + 1; i++) {
+		if (*fast_ptr == NULL) {
+			push_front(head, input);
+			return;
+		}
+		fast_ptr = &((*fast_ptr)->next);
+	}
+
+	while(*fast_ptr) {
+		fast_ptr = &((*fast_ptr)->next);
+		slow_ptr = &((*slow_ptr)->next);
+	}
+	new_node->next = (*slow_ptr)->next;
+	(*slow_ptr)->next = new_node;
+}
