@@ -51,3 +51,22 @@ void push_back(list_node_t **head, void *input) {
 	}
 	*indirect = new_node;
 }
+
+void push_front(list_node_t **head, void *input) {
+	list_node_t **indirect = head;
+	list_node_t *new_node = node_new(input);
+	new_node->next = *indirect;
+	*head = new_node;
+}
+
+void insert_mid(list_node_t **head, void *input) {
+	list_node_t **fast = head;
+	list_node_t **slow = head;
+	list_node_t *new_node = node_new(input);
+	while(*fast && (*fast)->next) {
+		fast = &((*fast)->next->next);
+		slow = &((*slow)->next);
+	}
+	new_node->next = (*slow)->next;
+	(*slow)->next = new_node;
+}

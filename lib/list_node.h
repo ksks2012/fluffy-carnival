@@ -26,5 +26,8 @@ void print_list(const list_node_t *);
 void delete_list(list_t *);
 
 void push_back(list_node_t **, void *);
+void push_front(list_node_t **, void *);
+
+void insert_mid(list_node_t **, void *);
 
 #endif /* __LIST_NODE_H__ */
