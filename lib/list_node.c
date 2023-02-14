@@ -112,3 +112,20 @@ void remove_nth_node(list_node_t **head, int n) {
 	(*indirect)->next = (*indirect)->next->next;
 	free(tmp);
 }
+
+void remove_mid_node(list_node_t **head) {
+	list_node_t **fast_ptr = head;
+	list_node_t **slow_ptr = head;
+
+	while ((*fast_ptr)->next && (*fast_ptr)->next->next)
+	{
+		slow_ptr = &((*slow_ptr)->next);
+		fast_ptr = &((*fast_ptr)->next->next);
+	}
+	if(!(*slow_ptr)) {
+		return;
+	}
+	list_node_t **tmp = (*slow_ptr)->next;
+	(*slow_ptr)->next = (*slow_ptr)->next->next;
+	free(tmp);
+}

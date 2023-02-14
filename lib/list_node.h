@@ -32,5 +32,6 @@ void insert_mid(list_node_t **, void *);
 void insert_nth_last(list_node_t **, void *, int);
 
 void remove_nth_node(list_node_t **, int);
+void remove_mid_node(list_node_t **);
 
 #endif /* __LIST_NODE_H__ */
