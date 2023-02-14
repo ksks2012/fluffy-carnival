@@ -95,3 +95,20 @@ void insert_nth_last(list_node_t **head, void *input, int n) {
 	new_node->next = (*slow_ptr)->next;
 	(*slow_ptr)->next = new_node;
 }
+
+void remove_nth_node(list_node_t **head, int n) {
+	list_node_t **indirect = head;
+	
+	int count = 0;
+	while (*indirect && count < n - 1)
+	{
+		indirect = &((*indirect)->next);
+		count++;
+	}
+	if(!(*indirect)) {
+		return;
+	}
+	list_node_t *tmp = (*indirect)->next;
+	(*indirect)->next = (*indirect)->next->next;
+	free(tmp);
+}
