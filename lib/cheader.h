@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "ks_random.h"
 #include "list_node.h"
+#include "sort.h"
 
 #endif /* __CHEADER_H__ */

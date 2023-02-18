@@ -17,5 +17,6 @@ typedef enum bool {
 #define swap(x,y) {int t; (t)=(x); (x)=(y); (y)=(t);}
 
 list_node_t* list_insertion_sort(list_node_t *);
+void list_quick_sort(list_node_t **);
 
 #endif

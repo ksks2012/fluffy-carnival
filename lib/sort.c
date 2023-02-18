@@ -42,3 +42,32 @@ list_node_t* list_insertion_sort(list_node_t *start) {
 	}
 	return start;
 }
+
+/*
+ * https://hackmd.io/@sysprog/linux2021-quiz1
+ */
+void list_quick_sort(list_node_t **start) {
+	if (!*start)
+		return;
+
+	list_node_t *pivot = *start;
+	int value = *((int *)pivot->value);
+	list_node_t *p = pivot->next;
+	pivot->next = NULL;
+
+	list_node_t *left = NULL, *right = NULL;
+	while (p) {
+		list_node_t *n = p;
+		p = p->next;
+		list_add_node(*((int *)n->value) > value ? &(right) : &(left), n);
+	}
+	list_quick_sort(&left);
+	list_quick_sort(&right);
+
+	list_node_t *result = NULL;
+	list_concat(&result, left);
+	list_concat(&result, pivot);
+	list_concat(&result, right); 
+
+	*start = result;
+}

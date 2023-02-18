@@ -125,7 +125,17 @@ void remove_mid_node(list_node_t **head) {
 	if(!(*slow_ptr)) {
 		return;
 	}
-	list_node_t **tmp = (*slow_ptr)->next;
+	list_node_t *tmp = (*slow_ptr)->next;
 	(*slow_ptr)->next = (*slow_ptr)->next->next;
 	free(tmp);
+}
+inline void list_add_node(list_node_t **list, list_node_t *new_node) {
+    new_node->next = *list;
+    *list = new_node;
+}
+
+inline void list_concat(list_node_t **left, list_node_t *right) {
+    while (*left)
+        left = &((*left)->next);
+    *left = right;
 }
