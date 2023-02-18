@@ -129,13 +129,31 @@ void remove_mid_node(list_node_t **head) {
 	(*slow_ptr)->next = (*slow_ptr)->next->next;
 	free(tmp);
 }
+
 inline void list_add_node(list_node_t **list, list_node_t *new_node) {
-    new_node->next = *list;
-    *list = new_node;
+	new_node->next = *list;
+	*list = new_node;
 }
 
 inline void list_concat(list_node_t **left, list_node_t *right) {
-    while (*left)
-        left = &((*left)->next);
-    *left = right;
+	while (*left)
+		left = &((*left)->next);
+	*left = right;
+}
+
+bool list_is_ordered(list_node_t *list) {
+    bool first = TRUE;
+    int value;
+    while (list) {
+        if (first) {
+            value = *((int *)(list->value));
+            first = FALSE;
+        } else {
+            if (*((int *)(list->value)) < value)
+                return FALSE;
+            value = *((int *)(list->value));
+        }
+        list = list->next;
+    }
+    return TRUE;
 }

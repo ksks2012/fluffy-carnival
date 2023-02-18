@@ -1,21 +1,5 @@
 #include "../lib/cheader.h"
 
-static bool list_is_ordered(list_node_t *list) {
-    bool first = TRUE;
-    int value;
-    while (list) {
-        if (first) {
-            value = *((int *)(list->value));
-            first = FALSE;
-        } else {
-            if (*((int *)(list->value)) < value)
-                return FALSE;
-            value = *((int *)(list->value));
-        }
-        list = list->next;
-    }
-    return TRUE;
-}
 
 int main(int argc, char **argv) {
     const int array_size = 100;

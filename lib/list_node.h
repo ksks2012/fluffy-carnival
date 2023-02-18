@@ -37,4 +37,6 @@ void remove_mid_node(list_node_t **);
 inline void list_add_node(list_node_t **, list_node_t *);
 inline void list_concat(list_node_t **, list_node_t *);
 
+bool list_is_ordered(list_node_t *);
+
 #endif /* __LIST_NODE_H__ */
