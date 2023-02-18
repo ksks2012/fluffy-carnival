@@ -23,7 +23,16 @@ void test_remove_mid_node() {
 	print_list(list->head);
 }
 
+void test_remove_duplicates_node() {
+	int input[4] = {1, 1, 1, 1};
+	list_t *list = array_to_list(input, 4);
+	print_list(list->head);
+	remove_duplicates_node(&(list->head));
+	print_list(list->head);
+}
+
 int main() {
 	test_remove_nth_node();
 	test_remove_mid_node();
+	test_remove_duplicates_node();
 }

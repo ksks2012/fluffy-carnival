@@ -130,6 +130,31 @@ void remove_mid_node(list_node_t **head) {
 	free(tmp);
 }
 
+void remove_duplicates_node(list_node_t **head) {
+	if (!list_is_ordered(*head) || *head == NULL) {
+		return;
+	}
+	list_node_t *current = *head;
+	list_node_t *tmp = (*head)->next;
+	list_node_t *hold;
+
+	while (tmp != NULL)
+	{
+		if(*((int *)tmp->value) == *((int *)current->value)) {
+			hold = tmp;
+		} else {
+			current = tmp;
+		}
+		
+		tmp = tmp->next;
+		if(hold != NULL) {
+			current->next = tmp;
+			free(hold);
+			hold = NULL;
+		}
+	}
+}
+
 inline void list_add_node(list_node_t **list, list_node_t *new_node) {
 	new_node->next = *list;
 	*list = new_node;
