@@ -155,6 +155,37 @@ void remove_duplicates_node(list_node_t **head) {
 	}
 }
 
+void remove_duplicates_node_in_none_sort_list(list_node_t **head) {
+	if (*head == NULL) {
+		return;
+	}
+
+	list_node_t *current = *head;
+	list_node_t *prev = current;
+	list_node_t *tmp = (*head)->next;
+	list_node_t *hold;
+
+	while(current != NULL) {
+		prev = current;
+		tmp = current->next;
+		while (tmp != NULL)
+		{
+			if(*((int *)tmp->value) == *((int *)current->value)) {
+				hold = tmp;
+			} else {
+				prev = tmp;
+			}
+			tmp = tmp->next;
+			if(hold != NULL) {
+				prev->next = tmp;
+				free(hold);
+				hold = NULL;
+			}
+		}
+		current = current->next;
+	}	
+}
+
 inline void list_add_node(list_node_t **list, list_node_t *new_node) {
 	new_node->next = *list;
 	*list = new_node;

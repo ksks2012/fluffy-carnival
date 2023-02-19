@@ -31,8 +31,17 @@ void test_remove_duplicates_node() {
 	print_list(list->head);
 }
 
+void test_remove_duplicates_node_in_none_sort_list() {
+	int input[7] = {1, 2, 1, 3, 1, 1, 2};
+	list_t *list = array_to_list(input, 7);
+	print_list(list->head);
+	remove_duplicates_node_in_none_sort_list(&(list->head));
+	print_list(list->head);
+}
+
 int main() {
 	test_remove_nth_node();
 	test_remove_mid_node();
 	test_remove_duplicates_node();
+	test_remove_duplicates_node_in_none_sort_list();
 }
