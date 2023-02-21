@@ -97,19 +97,25 @@ void insert_nth_last(list_node_t **head, void *input, int n) {
 }
 
 void remove_nth_node_from_tail(list_node_t **head, int n) {
-	list_node_t **indirect = head;
+	list_node_t **fast = head;
 	
 	int count = 0;
-	while (*indirect && count < n - 1)
+	while (*fast && count < n - 1)
 	{
-		indirect = &((*indirect)->next);
+		fast = &((*fast)->next);
 		count++;
 	}
-	if(!(*indirect)) {
+	list_node_t **slow = head;
+	while (*fast)
+	{
+		fast = &((*fast)->next);
+		slow = &((*slow)->next);
+	}
+	if(!(*slow)) {
 		return;
 	}
-	list_node_t *tmp = (*indirect)->next;
-	(*indirect)->next = (*indirect)->next->next;
+	list_node_t *tmp = (*slow)->next;
+	(*slow)->next = (*slow)->next->next;
 	free(tmp);
 }
 
@@ -187,7 +193,20 @@ void remove_duplicates_node_in_none_sort_list(list_node_t **head) {
 }
 
 void remove_nth_node(list_node_t **head, int n) {
-
+	list_node_t **indirect = head;
+	
+	int count = 0;
+	while (*indirect && count < n - 1)
+	{
+		indirect = &((*indirect)->next);
+		count++;
+	}
+	if(!(*indirect)) {
+		return;
+	}
+	list_node_t *tmp = (*indirect)->next;
+	(*indirect)->next = (*indirect)->next->next;
+	free(tmp);
 }
 
 inline void list_add_node(list_node_t **list, list_node_t *new_node) {
@@ -202,18 +221,18 @@ inline void list_concat(list_node_t **left, list_node_t *right) {
 }
 
 bool list_is_ordered(list_node_t *list) {
-    bool first = TRUE;
-    int value;
-    while (list) {
-        if (first) {
-            value = *((int *)(list->value));
-            first = FALSE;
-        } else {
-            if (*((int *)(list->value)) < value)
-                return FALSE;
-            value = *((int *)(list->value));
-        }
-        list = list->next;
-    }
-    return TRUE;
+	bool first = TRUE;
+	int value;
+	while (list) {
+		if (first) {
+			value = *((int *)(list->value));
+			first = FALSE;
+		} else {
+			if (*((int *)(list->value)) < value)
+				return FALSE;
+			value = *((int *)(list->value));
+		}
+		list = list->next;
+	}
+	return TRUE;
 }
