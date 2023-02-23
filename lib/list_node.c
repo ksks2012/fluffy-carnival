@@ -1,11 +1,11 @@
 #include "cheader.h"
 
-inline list_node_t* node_new(void* value) {
+inline list_node_t* node_new(int value) {
 	list_node_t *new_node = (list_node_t *)malloc(sizeof(list_node_t));
 	if(new_node == NULL)
 		return NULL;
 	new_node->next = NULL;
-	new_node->value = (typeof(value))value;
+	new_node->value = value;
 	return new_node;
 }
 
@@ -14,18 +14,19 @@ list_t* array_to_list(int *arr, int size) {
 		return NULL;
 	}
 	list_t *list = (list_t *)malloc(sizeof(list_t));
-	for(int i = 0; i < size; i++) {
-		push_back(&(list->head), &(arr[i]));
+	for(int i = 0; i < 1; i++) {
+		print_list(list->head);
+		push_back(&(list->head), arr[i]);
 	}
 	return list;
 }
 
 void print_list(const list_node_t *head) {
 	list_node_t const *ptr = head;
-	while (ptr)
+	while (ptr && ptr->value)
 	{
 		/* code */
-		printf("%d -> ", *((int *)(ptr->value)));
+		printf("%d -> ", ptr->value);
 		ptr = ptr->next;
 	}
 	printf("NULL\n");
@@ -42,24 +43,29 @@ void delete_list(list_t *list) {
 }
 
 // add node to back
-void push_back(list_node_t **head, void *input) {
-	list_node_t **indirect = head;
+void push_back(list_node_t **head, int input) {
+	list_node_t *indirect = *head;
 	list_node_t *new_node = node_new(input);
-	while (*indirect)
+	if(indirect == NULL) 
 	{
-		indirect = &((*indirect)->next);
+		*head = new_node;
+		return;
 	}
-	*indirect = new_node;
+	while (indirect->next )
+	{
+		indirect = indirect->next;
+	}
+	indirect->next = new_node;
 }
 
-void push_front(list_node_t **head, void *input) {
+void push_front(list_node_t **head, int input) {
 	list_node_t **indirect = head;
 	list_node_t *new_node = node_new(input);
 	new_node->next = *indirect;
 	*head = new_node;
 }
 
-void insert_mid(list_node_t **head, void *input) {
+void insert_mid(list_node_t **head, int input) {
 	list_node_t **fast = head;
 	list_node_t **slow = head;
 	list_node_t *new_node = node_new(input);
@@ -71,7 +77,7 @@ void insert_mid(list_node_t **head, void *input) {
 	(*slow)->next = new_node;
 }
 
-void insert_nth_last(list_node_t **head, void *input, int n) {
+void insert_nth_last(list_node_t **head, int input, int n) {
 	/*
 		insert the node to list in n-th position from last
 		if n > length of node then push in front
@@ -111,7 +117,7 @@ void remove_nth_node_from_tail(list_node_t **head, int n) {
 		fast = &((*fast)->next);
 		slow = &((*slow)->next);
 	}
-	if(!(*slow)) {
+	if((*slow) == NULL || ((*slow)->next) == NULL) {
 		return;
 	}
 	list_node_t *tmp = (*slow)->next;
@@ -146,7 +152,7 @@ void remove_duplicates_node(list_node_t **head) {
 
 	while (tmp != NULL)
 	{
-		if(*((int *)tmp->value) == *((int *)current->value)) {
+		if(tmp->value == current->value) {
 			hold = tmp;
 		} else {
 			current = tmp;
@@ -176,7 +182,7 @@ void remove_duplicates_node_in_none_sort_list(list_node_t **head) {
 		tmp = current->next;
 		while (tmp != NULL)
 		{
-			if(*((int *)tmp->value) == *((int *)current->value)) {
+			if(tmp->value == current->value) {
 				hold = tmp;
 			} else {
 				prev = tmp;
@@ -225,12 +231,12 @@ bool list_is_ordered(list_node_t *list) {
 	int value;
 	while (list) {
 		if (first) {
-			value = *((int *)(list->value));
+			value = list->value;
 			first = FALSE;
 		} else {
-			if (*((int *)(list->value)) < value)
+			if (list->value < value)
 				return FALSE;
-			value = *((int *)(list->value));
+			value = list->value;
 		}
 		list = list->next;
 	}

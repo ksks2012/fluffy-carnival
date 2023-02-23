@@ -12,7 +12,7 @@ typedef enum bool {
 typedef struct list_node_t
 {
 	/* data */
-	void * value;
+	int value;
 	struct list_node_t *next;
 }list_node_t;
 
@@ -20,16 +20,16 @@ typedef struct list_t {
 	list_node_t *head;
 } list_t;
 
-extern inline list_node_t* node_new(void *);
+extern inline list_node_t* node_new(int );
 list_t* array_to_list(int *, int);
 void print_list(const list_node_t *);
 void delete_list(list_t *);
 
-void push_back(list_node_t **, void *);
-void push_front(list_node_t **, void *);
+void push_back(list_node_t **, int);
+void push_front(list_node_t **, int );
 
-void insert_mid(list_node_t **, void *);
-void insert_nth_last(list_node_t **, void *, int);
+void insert_mid(list_node_t **, int );
+void insert_nth_last(list_node_t **, int , int);
 
 void remove_nth_node_from_tail(list_node_t **, int);
 void remove_mid_node(list_node_t **);

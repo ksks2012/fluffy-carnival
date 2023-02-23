@@ -51,7 +51,7 @@ void list_quick_sort(list_node_t **start) {
 		return;
 
 	list_node_t *pivot = *start;
-	int value = *((int *)pivot->value);
+	int value = pivot->value;
 	list_node_t *p = pivot->next;
 	pivot->next = NULL;
 
@@ -59,7 +59,7 @@ void list_quick_sort(list_node_t **start) {
 	while (p) {
 		list_node_t *n = p;
 		p = p->next;
-		list_add_node(*((int *)n->value) > value ? &(right) : &(left), n);
+		list_add_node(n->value > value ? &(right) : &(left), n);
 	}
 	list_quick_sort(&left);
 	list_quick_sort(&right);
